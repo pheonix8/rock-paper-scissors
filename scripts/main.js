@@ -1,6 +1,6 @@
 import { gameService } from './model/game-service.js';
 
-
+// Model
 let WaitingTimer;
 let waitingTime = 0;
 let handSelected = false;
@@ -8,7 +8,7 @@ let handSelected = false;
 let name = '';
 let currentView = 'main';
 
-
+// View
 const mainPage = document.querySelector('#main-page');
 const gamePage = document.querySelector('#game-page');
 
@@ -17,13 +17,12 @@ const playerName = document.querySelector('#player-name');
 
 const rankingTable = document.querySelector('#ranking');
 
-const playerHand = document.querySelector('#player-hand');
-const gamePrompt = document.querySelector('#game-prompt');
-const opponentHand = document.querySelector('#opponent-hand');
+const playerHandElement = document.querySelector('#player-hand');
+const gamePromptElement = document.querySelector('#game-prompt');
+const opponentHandElement = document.querySelector('#opponent-hand');
 
 const homeButton = document.querySelector('#home-button');
 const resultsTable = document.querySelector('#results');
-
 
 async function renderRankings() {
     let rankings = await gameService.getRankings();
@@ -32,7 +31,7 @@ async function renderRankings() {
     rankingTable.innerHTML = '';
 
     rankings.forEach((rankingEntry) => {
-        let ranking = `
+        const ranking = `
         <div>
             <div>${rankingEntry.rank}. Rang mit ${rankingEntry.wins} wins:</div>
             <div>${rankingEntry.players}</div>
@@ -46,7 +45,7 @@ renderRankings();
 
 function renderHistoryEntry(entry) {
     const entryElement = document.createElement('tr');
-    let icon = '';
+    let icon ;
 
     switch (entry.result) {
         case 1:
@@ -69,31 +68,18 @@ function renderHistoryEntry(entry) {
     resultsTable.insertBefore(entryElement, resultsTable.firstChild);
 }
 
-function renderHand() {
-    playerHand.innerHTML = '';
-
-    for (const hand of gameService.possibleHands) {
-        const button = document.createElement('button');
-        button.textContent = hand;
-        button.setAttribute('data-hand', hand);
-        button.addEventListener('click', onHandSelect);
-
-        playerHand.appendChild(button);
-    }
-}
-
 function renderGamePrompt(newStart = false) {
     if (waitingTime >= 3 || newStart) {
-        gamePrompt.textContent = 'VS';
+        gamePromptElement.textContent = 'VS';
         waitingTime = 0;
     } else {
-        gamePrompt.textContent = `Next round in ${3 - waitingTime} seconds`;
+        gamePromptElement.textContent = `Next round in ${3 - waitingTime} seconds`;
         waitingTime += 1;
     }
 }
 
 function renderOpponentHand(hand) {
-    opponentHand.textContent = hand;
+    opponentHandElement.textContent = hand;
 }
 
 async function onHandSelect(event) {
@@ -123,13 +109,26 @@ async function onHandSelect(event) {
             clearInterval(WaitingTimer);
 
             event.target.classList.remove('win', 'lose', 'draw');
-            opponentHand.textContent = '?';
+            opponentHandElement.textContent = '?';
             handSelected = false;
         }
 
         renderGamePrompt();
     }, 1000);
 
+}
+
+function renderHand() {
+    playerHandElement.innerHTML = '';
+
+    for (const hand of gameService.possibleHands) {
+        const button = document.createElement('button');
+        button.textContent = hand;
+        button.setAttribute('data-hand', hand);
+        button.addEventListener('click', onHandSelect);
+
+        playerHandElement.appendChild(button);
+    }
 }
 
 function renderView() {
@@ -144,13 +143,13 @@ function renderView() {
         renderGamePrompt(true);
         renderHand();
         renderOpponentHand('?');
-        //render history
     } else {
         currentView = 'main';
         renderRankings();
     }
 }
 
+// Controller
 playerNameForm.addEventListener('submit', (event) => {
     event.preventDefault();
 
@@ -166,6 +165,3 @@ homeButton.addEventListener('click', () => {
     resultsTable.innerHTML = '';
     renderView();
 });
-
-
-

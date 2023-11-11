@@ -81,7 +81,7 @@ export class OfflineGameService {
 
         await Utils.wait(OfflineGameService.DELAY_MS); // emulate async
 
-        let result = {
+        const result = {
             playerHand,
             systemHand,
             result: gameEval,
