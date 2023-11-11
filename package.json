@@ -1,0 +1,27 @@
+{
+    "name": "wed-1-testat-template",
+    "version": "1.0.0",
+    "description": "Testat template",
+    "main": "scripts/main.js",
+    "type": "module",
+    "scripts": {
+        "start": "http-server -o /schere-stein-papier.html",
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "stylelint": "stylelint \"**/*.css\"",
+        "eslint": "eslint scripts/**",
+        "all": "npm run stylelint && npm run eslint  && node -e \"console.log('npm run all completed')\""
+    },
+    "author": "Michael Gfeller",
+    "license": "ISC",
+    "devDependencies": {
+        "eslint": "^8.53.0",
+        "eslint-config-airbnb-base": "^15.0.0",
+        "eslint-config-prettier": "^9.0.0",
+        "eslint-plugin-import": "^2.29.0",
+        "http-server": "^14.1.1",
+        "prettier": "^2.5.1",
+        "prettier-eslint": "15.0.1",
+        "stylelint": "^15.11.0",
+        "stylelint-config-standard": "^34.0.0"
+    }
+}
