@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <title>Schere Stein Papier</title>
+    <link rel="stylesheet" href="styles/global.css">
+    <script src="scripts/main.js" type="module"></script>
+</head>
+<body>
+<h1 class="title">The R-P-S Game</h1>
+<article id="main-page">
+    <section>
+        <button>Server</button>
+        <button>Local</button>
+    </section>
+    <section class="top">
+        <h2 class="title">New Game</h2>
+        <form id="player-name-form">
+            <label>
+                <input type="text" placeholder="enter your name" name="name" required />
+            </label>
+            <button type="submit">
+                play
+            </button>
+        </form>
+    </section>
+    <section>
+        <h2>Ranking</h2>
+        <section id="ranking"></section>
+    </section>
+</article>
+<article id="game-page" class="hidden">
+    <section class="top">
+        <h2 id="player-name" class="title"></h2>
+        <div id="player-hand">
+        </div>
+        <div>
+            <p id="game-prompt"></p>
+        </div>
+        <div>
+            <p id="opponent-hand">?</p>
+        </div>
+    </section>
+    <section>
+        <h2 class="title">History</h2>
+        <table id="history-table">
+            <thead>
+                <tr>
+                    <th>Result</th>
+                    <th>Player</th>
+                    <th>Opponent</th>
+                </tr>
+            </thead>
+            <tbody id="results">
+            </tbody>
+        </table>
+    </section>
+    <div class="back">
+        <button id="home-button">back to home</button>
+    </div>
+</article>
+</body>
+</html>

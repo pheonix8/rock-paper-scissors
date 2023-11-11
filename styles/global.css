@@ -1,0 +1,109 @@
+* {
+    font-family: "Roboto Light", sans-serif;
+    font-size: 16px;
+    background-color: aliceblue;
+}
+
+body {
+    margin: 0;
+}
+
+article{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+button {
+    background-color: #fff;
+    border: 1px solid #000;
+    border-radius: 4px;
+    padding: 8px 12px;
+    cursor: pointer;
+}
+
+button:hover, button:active {
+    background-color: #000;
+    color: #fff;
+}
+
+input {
+    border: 1px solid #000;
+    border-radius: 4px;
+    padding: 8px 12px;
+}
+
+h1 {
+    color: deeppink;
+    font-size: 24px;
+}
+
+h2 {
+    color: darkviolet;
+    font-size: 20px;
+}
+
+td {
+    text-align: center;
+}
+
+#main-page, #game-page {
+    min-width: 360px;
+}
+
+#player-hand {
+    margin: 32px 0;
+    display: flex;
+    justify-content: space-between;
+}
+
+#game-prompt {
+    display: flex;
+    justify-content: center;
+}
+
+#opponent-hand {
+    font-size: 1.5rem;
+    font-weight: bold;
+    text-align: center;
+}
+
+#history-table {
+    width: 100%;
+}
+
+.hidden {
+    display: none;
+}
+
+.top {
+    padding-bottom: 5px;
+    border-bottom: 1px solid;
+}
+
+.win, .win:hover {
+    background-color: forestgreen;
+    color: #fff;
+}
+
+.lose, .lose:hover {
+    background-color: orangered;
+    color: #fff;
+}
+
+.draw, .draw:hover {
+    background-color: coral;
+    color: #fff;
+}
+
+.title {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.back {
+    margin-top: 5px;
+}
+
+
