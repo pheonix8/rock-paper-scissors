@@ -14,7 +14,8 @@ class GameService {
     }
 
     async getRankings() {
-        return this.service.getRankings();
+        let rankings = this.service.getRankings();
+        return rankings.slice(0, 10);
     }
 
     async evaluate(playerName, playerHand) {

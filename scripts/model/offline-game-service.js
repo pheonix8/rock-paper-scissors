@@ -76,7 +76,7 @@ export class OfflineGameService {
     }
 
     async evaluate(playerName, playerHand) {
-        const systemHand = this.possibleHands[Math.floor(Math.random() * 5)];
+        const systemHand = this.possibleHands[Math.floor(Math.random() * this.possibleHands.length)];
         const gameEval = this.#resultLookup[systemHand][playerHand];
 
         await Utils.wait(OfflineGameService.DELAY_MS); // emulate async
