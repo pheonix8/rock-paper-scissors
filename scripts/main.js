@@ -26,7 +26,6 @@ const resultsTable = document.querySelector('#results');
 
 async function renderRankings() {
     let rankings = await gameService.getRankings();
-    rankings = rankings.slice(0, 10);
 
     rankingTable.innerHTML = '';
 
@@ -45,25 +44,24 @@ renderRankings();
 
 function renderHistoryEntry(entry) {
     const entryElement = document.createElement('tr');
-    let icon ;
+    let iconElement = entryElement.insertCell(0);
 
     switch (entry.result) {
         case 1:
-            icon = '&#10003;';
+            iconElement.classList.add('icon-win', 'win');
             break;
         case -1:
-            icon = '&#10005;';
+            iconElement.classList.add('icon-lose', 'lose');
             break;
         default:
-            icon = '-';
+            iconElement.classList.add('icon-draw', 'draw');
             break;
     }
 
-    entryElement.innerHTML = `
-        <td>${icon}</td>
-        <td>${entry.playerHand}</td>
-        <td>${entry.systemHand}</td>
-    `;
+    const playerElement = entryElement.insertCell(1);
+    playerElement.textContent = entry.playerHand;
+    const systemElement = entryElement.insertCell(2);
+    systemElement.textContent = entry.systemHand;
 
     resultsTable.insertBefore(entryElement, resultsTable.firstChild);
 }

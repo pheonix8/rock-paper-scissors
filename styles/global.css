@@ -106,4 +106,14 @@ td {
     margin-top: 5px;
 }
 
+.icon-win::before {
+    content: '\2713';
+}
 
+.icon-lose::before {
+    content: '\2715';
+}
+
+.icon-draw::before {
+    content: '-';
+}
