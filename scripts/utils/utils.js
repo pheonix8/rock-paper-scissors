@@ -6,4 +6,8 @@ export class Utils {
             }, ms);
         });
     }
+
+    static formatHandName(hand) {
+        return hand ? hand.charAt(0).toUpperCase() + hand.slice(1) : '?';
+    }
 }

@@ -1,18 +1,17 @@
 <!DOCTYPE html>
-<html lang="de">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Schere Stein Papier</title>
+    <title>Rock Paper Scissors</title>
     <link rel="stylesheet" href="styles/global.css">
     <script src="scripts/main.js" type="module"></script>
 </head>
 <body>
 <h1 class="title">The R-P-S Game</h1>
-<article id="main-page">
-    <section>
+<article id="main-page-article">
+    <div>
         <button>Server</button>
-        <button>Local</button>
-    </section>
+    </div>
     <section class="top">
         <h2 class="title">New Game</h2>
         <form id="player-name-form">
@@ -20,26 +19,25 @@
                 <input type="text" placeholder="enter your name" name="name" required />
             </label>
             <button type="submit">
-                play
+                Play
             </button>
         </form>
     </section>
     <section>
-        <h2>Ranking</h2>
-        <section id="ranking"></section>
+        <h2 class="title">Ranking</h2>
+        <ul id="ranking-list"></ul>
     </section>
 </article>
-<article id="game-page" class="hidden">
+<article id="game-page-article" class="hidden">
+    <div>
+        <button id="home-button">Back to Home</button>
+    </div>
     <section class="top">
-        <h2 id="player-name" class="title"></h2>
-        <div id="player-hand">
+        <h2 id="player-name-title" class="title"></h2>
+        <div id="player-hand-selection-div">
         </div>
-        <div>
-            <p id="game-prompt"></p>
-        </div>
-        <div>
-            <p id="opponent-hand">?</p>
-        </div>
+            <p id="game-prompt-paragraph"></p>
+            <p id="opponent-hand-paragraph">?</p>
     </section>
     <section>
         <h2 class="title">History</h2>
@@ -51,13 +49,10 @@
                     <th>Opponent</th>
                 </tr>
             </thead>
-            <tbody id="results">
+            <tbody id="history-table-body">
             </tbody>
         </table>
     </section>
-    <div class="back">
-        <button id="home-button">back to home</button>
-    </div>
 </article>
 </body>
 </html>

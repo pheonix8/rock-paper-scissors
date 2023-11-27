@@ -8,7 +8,7 @@ body {
     margin: 0;
 }
 
-article{
+article {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -22,7 +22,7 @@ button {
     cursor: pointer;
 }
 
-button:hover, button:active {
+button:hover:enabled, button:active:enabled {
     background-color: #000;
     color: #fff;
 }
@@ -47,28 +47,37 @@ td {
     text-align: center;
 }
 
-#main-page, #game-page {
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+li {
+    list-style: none;
+}
+
+#main-page-article, #game-page-article {
     min-width: 360px;
 }
 
-#player-hand {
+#player-hand-selection-div {
     margin: 32px 0;
     display: flex;
     justify-content: space-between;
 }
 
-#game-prompt {
+#game-prompt-paragraph {
     display: flex;
     justify-content: center;
 }
 
-#opponent-hand {
+#opponent-hand-paragraph {
     font-size: 1.5rem;
     font-weight: bold;
     text-align: center;
 }
 
-#history-table {
+#history-table, #ranking-list {
     width: 100%;
 }
 
@@ -100,10 +109,6 @@ td {
     display: flex;
     flex-direction: column;
     align-items: center;
-}
-
-.back {
-    margin-top: 5px;
 }
 
 .icon-win::before {
