@@ -14,7 +14,7 @@ class GameService {
     }
 
     async getRankings() {
-        let rankings = this.service.getRankings();
+        const rankings = await this.service.getRankings();
         return rankings.slice(0, 10);
     }
 

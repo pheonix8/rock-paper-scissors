@@ -29,15 +29,16 @@ async function renderRankings() {
 
     rankingTable.innerHTML = '';
 
-    rankings.forEach((rankingEntry) => {
-        const ranking = `
-        <div>
-            <div>${rankingEntry.rank}. Rang mit ${rankingEntry.wins} wins:</div>
-            <div>${rankingEntry.players}</div>
-        </div>
-        `;
-        rankingTable.insertAdjacentHTML('beforeend', ranking);
-    });
+    const rankingList = document.createElement('ul')
+    for (const ranking of rankings) {
+        const rankingItem = document.createElement('li');
+        rankingItem.innerHTML = `${ranking.rank}. rank with ${ranking.wins} wins: ${ranking.players.join(
+            ', ',
+        )}`;
+        rankingList.appendChild(rankingItem)
+    }
+
+    rankingTable.appendChild(rankingList)
 }
 
 renderRankings();
