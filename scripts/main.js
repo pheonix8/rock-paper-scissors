@@ -1,11 +1,13 @@
-import { gameService } from './model/game-service.js';
-import { Utils } from "./utils/utils.js";
+import {gameService} from './model/game-service.js';
+import {Utils} from "./utils/utils.js";
 
 // Model
 const waitingTime = 3;
 let waitingCounter = 0;
 
 let name = '';
+
+gameService.isOnline = true;
 
 // View
 const mainPage = document.querySelector('#main-page-article');
