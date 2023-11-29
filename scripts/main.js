@@ -2,12 +2,10 @@ import { gameService } from './model/game-service.js';
 import { Utils } from "./utils/utils.js";
 
 // Model
-let waitingTime = 3;
+const waitingTime = 3;
 let waitingCounter = 0;
 
 let name = '';
-let currentView = 'main';
-let currentConnection = 'local';
 
 // View
 const mainPage = document.querySelector('#main-page-article');
@@ -26,21 +24,19 @@ const homeButton = document.querySelector('#home-button');
 const historyTableBody = document.querySelector('#history-table-body');
 
 async function renderRankings() {
-    let rankings = await gameService.getRankings();
+    const rankings = await gameService.getRankings();
 
     rankingList.innerHTML = '';
     for (const ranking of rankings) {
         const rankingItem = document.createElement('li');
-        rankingItem.textContent = `${ranking.rank}. rank with ${ranking.wins} wins: ${ranking.players.join(
-            ', ',
-        )}`;
-        rankingList.appendChild(rankingItem)
+        rankingItem.textContent = `${ranking.rank}. rank with ${ranking.wins} wins: ${ranking.players.join(', ',)}`;
+        rankingList.appendChild(rankingItem);
     }
 }
 
 function renderHistoryEntry(entry) {
     const entryElement = document.createElement('tr');
-    let iconElement = entryElement.insertCell(0);
+    const iconElement = entryElement.insertCell(0);
 
     switch (entry.result) {
         case 1:
@@ -92,12 +88,22 @@ async function onHandSelect(event) {
     const { playerHand, systemHand, result } = await gameService.evaluate(name, hand);
     renderHistoryEntry({ playerHand, systemHand, result });
 
-    event.target.classList.add(result === 1 ? 'win' : result === -1 ? 'lose' : 'draw');
+    switch (result) {
+        case 1:
+            event.target.classList.add('win');
+            break;
+        case -1:
+            event.target.classList.add('lose');
+            break;
+        default:
+            event.target.classList.add('draw');
+            break;
+    }
 
     renderOpponentHand(systemHand);
     renderGamePrompt();
 
-    let WaitingTimer = setInterval(() => {
+    const WaitingTimer = setInterval(() => {
         if (waitingCounter > waitingTime) {
             clearInterval(WaitingTimer);
 
@@ -117,40 +123,49 @@ function renderHand() {
         const button = document.createElement('button');
         button.textContent = Utils.formatHandName(hand);
         button.setAttribute('data-hand', hand);
-        button.addEventListener('click', onHandSelect);
 
         playerHandSelectionDiv.appendChild(button);
     }
 }
 
-function renderView() {
+function renderView(view) {
     mainPage.classList.toggle('hidden');
     gamePage.classList.toggle('hidden');
 
-    if (currentView === 'main') {
-        currentView = 'game';
+    if (view === 'game') {
         renderGamePrompt(true);
         renderHand();
         renderOpponentHand('?');
     } else {
-        currentView = 'main';
-        renderRankings();
+        renderRankings().then();
     }
 }
 
 // Controller
-playerNameForm.addEventListener('submit', (event) => {
+function startGame(event) {
     event.preventDefault();
-
     const formData = new FormData(playerNameForm);
     name = formData.get('name');
 
     playerNameTitle.textContent = `${name} choose your hand`;
 
-    renderView();
-});
+    renderView('game');
+}
 
-homeButton.addEventListener('click', () => {
+function returnToMenu() {
     historyTableBody.innerHTML = '';
-    renderView();
-});
+    renderView('main');
+}
+
+function playerHandListener(event) {
+    event.preventDefault();
+    const clickedElement = event.target;
+
+    if (clickedElement.tagName === 'BUTTON') {
+        onHandSelect(event).then();
+    }
+}
+
+playerNameForm.addEventListener('submit', startGame);
+homeButton.addEventListener('click', returnToMenu);
+playerHandSelectionDiv.addEventListener('click', playerHandListener);
