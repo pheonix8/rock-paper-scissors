@@ -4,14 +4,13 @@ import {Utils} from "./utils/utils.js";
 // Model
 const waitingTime = 3;
 let waitingCounter = 0;
-
 let name = '';
-
-gameService.isOnline = true;
 
 // View
 const mainPage = document.querySelector('#main-page-article');
 const gamePage = document.querySelector('#game-page-article');
+
+const connectionSwitch = document.querySelector('#connection-switch');
 
 const playerNameForm = document.querySelector('#player-name-form');
 const playerNameTitle = document.querySelector('#player-name-title');
@@ -168,6 +167,21 @@ function playerHandListener(event) {
     }
 }
 
+function switchConnection() {
+    if (connectionSwitch.getAttribute('data-connected') === 'local') {
+        connectionSwitch.setAttribute('data-connected', 'server');
+        connectionSwitch.textContent = 'Switch to Local';
+        gameService.isOnline = true;
+        renderRankings().then();
+    } else {
+        connectionSwitch.setAttribute('data-connected', 'local');
+        connectionSwitch.textContent = 'Switch to Server';
+        gameService.isOnline = false;
+        renderRankings().then();
+    }
+}
+
+connectionSwitch.addEventListener('click', switchConnection);
 playerNameForm.addEventListener('submit', startGame);
 homeButton.addEventListener('click', returnToMenu);
 playerHandSelectionDiv.addEventListener('click', playerHandListener);

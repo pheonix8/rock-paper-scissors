@@ -26,7 +26,7 @@ export class OnlineGameService {
         let rankings = [];
         const response = await fetch(`${this.url}/ranking`);
         const data = await response.json();
-
+        console.log(data);
         for (const value of Object.values(data)) {
             rankings.push({
                 rank: 0,
