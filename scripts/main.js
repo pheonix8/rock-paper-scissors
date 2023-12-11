@@ -168,17 +168,15 @@ function playerHandListener(event) {
 }
 
 function switchConnection() {
-    if (connectionSwitch.getAttribute('data-connected') === 'local') {
-        connectionSwitch.setAttribute('data-connected', 'server');
-        connectionSwitch.textContent = 'Switch to Local';
-        gameService.isOnline = true;
-        renderRankings().then();
+    const connection = connectionSwitch.getAttribute('data-connected');
+    if (connection === 'Local') {
+        connectionSwitch.setAttribute('data-connected', 'Server');
     } else {
-        connectionSwitch.setAttribute('data-connected', 'local');
-        connectionSwitch.textContent = 'Switch to Server';
-        gameService.isOnline = false;
-        renderRankings().then();
+        connectionSwitch.setAttribute('data-connected', 'Local');
     }
+    connectionSwitch.textContent = `Switch to ${connection}`;
+    gameService.isOnline = !gameService.isOnline;
+    renderRankings().then();
 }
 
 connectionSwitch.addEventListener('click', switchConnection);

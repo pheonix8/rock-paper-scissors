@@ -26,7 +26,6 @@ export class OnlineGameService {
         let rankings = [];
         const response = await fetch(`${this.url}/ranking`);
         const data = await response.json();
-        console.log(data);
         for (const value of Object.values(data)) {
             rankings.push({
                 rank: 0,
@@ -51,19 +50,21 @@ export class OnlineGameService {
             `${this.url}/play?playerName=${playerName}&playerHand=${this.#handMap[playerHand]}&mode=spock`
         );
         const data = await response.json();
-        const systemHand = this.#reverseHandMap[data['choice']];
-        let result = 0;
+        const systemHand = this.#reverseHandMap[data.choice];
+        let gameEval = 0;
         if ('win' in data)  {
-            if (data['win']) {
-                result = 1;
+            if (data.win) {
+                gameEval = 1;
             } else {
-                result = -1;
+                gameEval = -1;
             }
         }
-        return {
+        const result = {
             playerHand,
             systemHand,
-            result: result,
+            result: gameEval,
         };
+
+        return result;
     }
 }
