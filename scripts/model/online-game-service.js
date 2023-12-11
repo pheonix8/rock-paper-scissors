@@ -59,12 +59,10 @@ export class OnlineGameService {
                 gameEval = -1;
             }
         }
-        const result = {
+        return {
             playerHand,
             systemHand,
             result: gameEval,
         };
-
-        return result;
     }
 }
